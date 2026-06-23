@@ -1,0 +1,60 @@
+body {
+margin: 0;
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+font-family: Arial, sans-serif;
+background: #0f0f0f;
+color: white;
+}
+
+.container {
+text-align: center;
+}
+
+#boredButton {
+font-size: 60px;
+padding: 40px 80px;
+border: none;
+border-radius: 20px;
+cursor: pointer;
+background: white;
+color: black;
+font-weight: bold;
+transition: transform 0.1s ease;
+}
+
+#boredButton:active {
+transform: scale(0.95);
+}
+
+.task-box {
+margin-top: 30px;
+}
+
+.task-box p {
+font-size: 28px;
+margin-bottom: 20px;
+}
+
+.buttons button {
+font-size: 20px;
+padding: 10px 25px;
+margin: 10px;
+border: none;
+border-radius: 10px;
+cursor: pointer;
+}
+
+#doneButton {
+background: #4ade80;
+}
+
+#skipButton {
+background: #f87171;
+}
+
+.hidden {
+display: none;
+}
