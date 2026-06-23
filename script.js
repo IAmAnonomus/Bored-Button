@@ -59,23 +59,39 @@ function checkDailyReset() {
 checkDailyReset();
 
 // ----------------------
-// CORE LOGIC
+// RANDOM CATEGORY LOGIC
 // ----------------------
 
 function getRandomCategory() {
   const categories = Object.keys(tasks);
+
+  // 20% chance of "random mode"
+  const useRandomMode = Math.random() < 0.2;
+
+  if (useRandomMode) {
+    return "random";
+  }
+
   const index = Math.floor(Math.random() * categories.length);
   return categories[index];
 }
 
 function getRandomTask() {
   const category = getRandomCategory();
-  const list = tasks[category];
 
-  let available = list.filter(t => !recentTasks.includes(t));
+  let pool = [];
+
+  if (category === "random") {
+    // flatten all tasks
+    pool = Object.values(tasks).flat();
+  } else {
+    pool = tasks[category];
+  }
+
+  let available = pool.filter(t => !recentTasks.includes(t));
 
   if (available.length === 0) {
-    available = list;
+    available = pool;
   }
 
   const index = Math.floor(Math.random() * available.length);
@@ -91,7 +107,6 @@ function updateCooldown(task) {
 }
 
 function showTask() {
-  // small UI delay for smoother feel
   setTimeout(() => {
     let task = getRandomTask();
 
@@ -113,10 +128,6 @@ function hideTask() {
   taskBox.classList.add("hidden");
   boredButton.style.display = "inline-block";
 }
-
-// ----------------------
-// EVENTS
-// ----------------------
 
 boredButton.addEventListener("click", showTask);
 doneButton.addEventListener("click", hideTask);
